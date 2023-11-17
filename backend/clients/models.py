@@ -8,7 +8,6 @@ class Client(models.Model):
     username = models.CharField(max_length=25, verbose_name="Имя Телеграм")
     first_name = models.CharField(max_length=25, verbose_name="Имя")
     last_name = models.CharField(max_length=25, verbose_name="Фамилия")
-    phone = models.CharField(max_length=20, verbose_name="Телефон")
     is_subscribed = models.BooleanField(default=False, verbose_name="Подписан на рассылку")
     registered_at = models.DateTimeField(auto_now_add=True, verbose_name="Когда зарегестрирован")
 
