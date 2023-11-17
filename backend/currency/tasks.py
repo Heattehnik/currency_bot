@@ -42,10 +42,10 @@ def parse_xml(xml_content):
         print(f"{type(currency_date)} дата")
         currency_date = currency_date.split(".")
         print(f"{type(currency_date)} - {currency_date}")
-        currency_date = currency_date.reverse()
+        currency_date = reversed(currency_date)
         print(currency_date)
         currency_date = "-".join(currency_date)
-        print("получили дату")
+        print(f"{currency_date} получили дату")
         for valute in root.findall("./Valute[@ID='R01235']"):
             char_code = valute.find('CharCode').text
             name = valute.find('Name').text
