@@ -11,6 +11,6 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'process-cbr-every-hour': {
         'task': 'currency.tasks.process_cbr_request',
-        'schedule': crontab(minute='*/1'),
+        'schedule': crontab(hour='*/1'),
     },
 }
