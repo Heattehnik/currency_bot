@@ -19,3 +19,5 @@ def process_cbr_request():
             return f"Ошибка при получении данных. Код ответа: {response.status_code}"
     except Exception as e:
         return f"Ошибка запроса: {str(e)}"
+
+# TODO Add sending last currency to subscribed users
