@@ -13,4 +13,8 @@ app.conf.beat_schedule = {
         'task': 'currency.tasks.process_cbr_request',
         'schedule': crontab(hour='*/1'),
     },
+    'send_currency-every-day': {
+        'task': 'clients.tasks.send_currency_rate',
+        'schedule': crontab(minute='*/1'),
+    },
 }

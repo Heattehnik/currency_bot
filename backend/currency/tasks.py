@@ -1,6 +1,5 @@
 import requests
 from celery import shared_task
-
 from currency.utils import parse_xml, process_parsed_info
 
 
@@ -20,4 +19,3 @@ def process_cbr_request():
     except Exception as e:
         return f"Ошибка запроса: {str(e)}"
 
-# TODO Add sending last currency to subscribed users
