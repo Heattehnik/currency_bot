@@ -1,16 +1,16 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-btnMain = [KeyboardButton(text='Назад')]
+main_menu_button = [KeyboardButton(text='Назад')]
 
 # --- Main menu ---
 
-btnRandom = [KeyboardButton(text='Рандомное число')]
-btnOther = [KeyboardButton(text='Подменю')]
-main_menu = ReplyKeyboardMarkup(keyboard=[btnRandom, btnOther])
-
+currency_button = [KeyboardButton(text='Узнать курс доллара')]
+history_button = [KeyboardButton(text='История запросов')]
+subscription_button = [KeyboardButton(text='Подписка')]
+main_menu = ReplyKeyboardMarkup(keyboard=[currency_button, history_button, subscription_button], resize_keyboard=True)
 
 # --- Sub menu ---
 
-btnSome = [KeyboardButton(text='Some Text')]
-btnSome2 = [KeyboardButton(text='Another text')]
-other_menu = ReplyKeyboardMarkup(keyboard=[btnSome, btnSome2, btnMain], resize_keyboard=True)
+subscribe_button = [KeyboardButton(text='Подписаться')]
+unsubscribe_button = [KeyboardButton(text='Отписаться')]
+subscription_menu = ReplyKeyboardMarkup(keyboard=[subscribe_button, unsubscribe_button, main_menu_button], resize_keyboard=True)
