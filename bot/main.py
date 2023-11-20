@@ -1,27 +1,34 @@
 import asyncio
 import logging
 import os
+import random
+
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from dotenv import load_dotenv
+import markups as nav
 
 load_dotenv()
 
-# Включаем логирование, чтобы не пропустить важные сообщения
+
 logging.basicConfig(level=logging.INFO)
-# Объект бота
 bot = Bot(token=os.getenv("BOT_TOKEN"))
-# Диспетчер
 dp = Dispatcher()
 
 
-# Хэндлер на команду /start
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer("Hello!")
+    await message.answer("Hello!", reply_markup=nav.main_menu)
 
+@dp.message()
+async def bot_message(message: types.Message):
+    if message.text == "Рандомное число":
+        await bot.send_message(message.from_user.id, f"Your number {random.randint(0, 1000)}")
+    elif message.text == "Подменю":
+        await bot.send_message(message.from_user.id, f"Submenu", reply_markup=nav.other_menu)
+    elif message.text == "Подменю":
+        await bot.send_message(message.from_user.id, f"Submenu", reply_markup=nav.other_menu)
 
-# Запуск процесса поллинга новых апдейтов
 async def main():
     await dp.start_polling(bot)
 

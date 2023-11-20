@@ -19,39 +19,55 @@ services:
     ports:
       - '5432:5432'
     env_file:
-      - .env
+      - ./.env
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
   app:
-    build: .
+    build: ./backend
     tty: true
     command: bash -c "python manage.py migrate && python manage.py csu && python manage.py runserver 0.0.0.0:8000"
     ports:
       - '8000:8000'
-      - '80:80'
     volumes:
-      - .:/app
+      - ./backend:/app
+    env_file:
+      - ./.env
     depends_on:
       db:
         condition: service_healthy
+  bot:
+    build: ./bot
+    tty: true
+    command: bash -c "python main.py"
+    volumes:
+      - ./bot:/bot
+    depends_on:
+      - app
+    env_file:
+      - ./.env
+
   celery:
-    build: .
+    build: ./backend
     tty: true
     command: celery -A config worker -l INFO
     depends_on:
       - redis
       - app
+    env_file:
+      - ./.env
 
   celery_beat:
-    build: .
+    build: ./backend
     tty: true
     command: celery -A config beat -l INFO -S django
     depends_on:
       - redis
       - app
+    env_file:
+      - ./.env
 
 volumes:
   pg_data:
